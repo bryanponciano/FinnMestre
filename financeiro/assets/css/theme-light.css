@@ -1,0 +1,239 @@
+﻿/* =====================================================
+   FinnMestre - Tema Claro
+   Light mode theme overrides
+   ===================================================== */
+
+body.theme-light {
+    /* Cores de fundo */
+    --bg-body: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-dark: #1e293b;
+    --bg-glass: rgba(255, 255, 255, 0.95);
+    --bg-glass-light: rgba(241, 245, 249, 0.8);
+
+    /* Cores de texto */
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+
+    /* Bordas */
+    --border-color: rgba(0, 0, 0, 0.08);
+
+    /* Sombras mais suaves */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+    /* Cores de sucesso/erro/alerta (mais vibrantes no claro) */
+    --success: #059669;
+    --success-light: rgba(5, 150, 105, 0.1);
+    --danger: #dc2626;
+    --danger-light: rgba(220, 38, 38, 0.1);
+    --warning: #d97706;
+    --warning-light: rgba(217, 119, 6, 0.1);
+}
+
+/* Navbar no tema claro */
+body.theme-light .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+body.theme-light .navbar .logo-text {
+    color: #1e293b;
+}
+
+body.theme-light .nav-links a {
+    color: #475569;
+}
+
+body.theme-light .nav-links a:hover,
+body.theme-light .nav-links a.active {
+    color: var(--fm-primary);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Cards no tema claro */
+body.theme-light .card,
+body.theme-light .form-card,
+body.theme-light .table-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.theme-light .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs no tema claro */
+body.theme-light .form-control {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #1e293b;
+}
+
+body.theme-light .form-control:focus {
+    background: #ffffff;
+    border-color: var(--fm-primary);
+}
+
+body.theme-light .form-control::placeholder {
+    color: #94a3b8;
+}
+
+/* Tabelas no tema claro */
+body.theme-light table thead {
+    background: #f1f5f9;
+}
+
+body.theme-light table tbody tr:hover {
+    background: #f8fafc;
+}
+
+body.theme-light table td,
+body.theme-light table th {
+    border-color: #e2e8f0;
+}
+
+/* Dropdowns no tema claro */
+body.theme-light .alerts-dropdown,
+body.theme-light .profile-dropdown {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Botões secundários no tema claro */
+body.theme-light .btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+body.theme-light .btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+body.theme-light .btn-ghost {
+    color: #475569;
+}
+
+body.theme-light .btn-ghost:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Behavioral cards no tema claro */
+body.theme-light .behavioral-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .behavioral-message.safe {
+    background: rgba(5, 150, 105, 0.08);
+    color: #047857;
+}
+
+body.theme-light .behavioral-message.warning {
+    background: rgba(217, 119, 6, 0.08);
+    color: #b45309;
+}
+
+body.theme-light .behavioral-message.danger {
+    background: rgba(220, 38, 38, 0.08);
+    color: #b91c1c;
+}
+
+body.theme-light .behavioral-message.positive {
+    background: rgba(5, 150, 105, 0.08);
+    color: #047857;
+}
+
+/* FinBot no tema claro */
+body.theme-light .finbot-bubble {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+/* Badges no tema claro */
+body.theme-light .badge {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+body.theme-light .badge.entrada {
+    background: rgba(5, 150, 105, 0.1);
+    color: #047857;
+}
+
+body.theme-light .badge.saida {
+    background: rgba(220, 38, 38, 0.1);
+    color: #b91c1c;
+}
+
+/* Limit bar no tema claro */
+body.theme-light .limit-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+body.theme-light .limit-bar {
+    background: #e2e8f0;
+}
+
+/* Micro projections no tema claro */
+body.theme-light .micro-projection {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+body.theme-light .micro-projection.highlight {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+body.theme-light .micro-input-wrapper input {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #1e293b;
+}
+
+/* Charts background no tema claro */
+body.theme-light .charts-grid canvas {
+    filter: brightness(1.05);
+}
+
+/* Modal no tema claro */
+body.theme-light .modal {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+
+body.theme-light .modal-header {
+    border-bottom-color: #e2e8f0;
+}
+
+/* Page header no tema claro */
+body.theme-light .page-header h1 {
+    color: #1e293b;
+}
+
+body.theme-light .page-header p {
+    color: #64748b;
+}
+
+/* Alert items no tema claro */
+body.theme-light .alert-item:hover {
+    background: #f8fafc;
+}
+
+/* Empty state no tema claro */
+body.theme-light .empty-state {
+    color: #64748b;
+}
+
+/* Summary cards numbers */
+body.theme-light .card-value {
+    color: #1e293b;
+}

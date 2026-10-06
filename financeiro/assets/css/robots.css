@@ -1,0 +1,801 @@
+/* =====================================================
+   FinnMestre - Profile Selector & 3D FinBots Styles
+   ===================================================== */
+
+/* ==========================================
+   PROFILE SELECTOR - HEADER
+   ========================================== */
+.profile-selector-wrapper {
+    position: relative;
+}
+
+.btn-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    background: var(--bg-glass-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-normal);
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.btn-profile:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--border-light);
+}
+
+.profile-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--fm-gradient-primary);
+    color: white;
+    font-size: 0.8rem;
+}
+
+.profile-badge.consolidado {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.profile-name {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.profile-arrow {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+
+.btn-profile:hover .profile-arrow {
+    transform: rotate(180deg);
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 280px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition-normal);
+    z-index: var(--z-dropdown);
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.profile-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.profile-dropdown-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-dropdown-header h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.profile-dropdown-list {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.profile-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.profile-dropdown-item:hover {
+    background: var(--bg-glass-light);
+}
+
+.profile-dropdown-item.active {
+    background: var(--fm-primary-alpha, rgba(16, 185, 129, 0.1));
+    border-left: 3px solid var(--fm-primary);
+}
+
+.profile-item-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.profile-dropdown-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-glass-light);
+}
+
+/* ==========================================
+   3D FINBOTS - ALERT & MERIT ROBOTS
+   ========================================== */
+
+/* Container base para ambos os robôs */
+.finbot-3d-container {
+    position: fixed;
+    z-index: var(--z-finbot);
+    pointer-events: none;
+}
+
+.finbot-3d {
+    pointer-events: auto;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* Robô de Alerta (Bronca) */
+.alert-robot-container {
+    bottom: 20px;
+    left: 20px;
+}
+
+.alert-robot {
+    width: 100px;
+    height: 130px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: floatRobot 3s ease-in-out infinite;
+}
+
+@keyframes floatRobot {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px) rotateY(5deg);
+    }
+}
+
+/* Corpo do Robô de Alerta */
+.alert-robot .robot-body {
+    position: absolute;
+    width: 80px;
+    height: 70px;
+    left: 10px;
+    top: 35px;
+    background: linear-gradient(145deg, #ef4444, #dc2626);
+    border-radius: 20px 20px 30px 30px;
+    box-shadow:
+        0 10px 30px rgba(239, 68, 68, 0.4),
+        inset 0 -10px 20px rgba(0, 0, 0, 0.2),
+        inset 0 10px 20px rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+}
+
+.alert-robot .robot-body::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    left: 10px;
+    top: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cabeça do Robô */
+.alert-robot .robot-head {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    left: 15px;
+    top: 0;
+    background: linear-gradient(145deg, #f87171, #ef4444);
+    border-radius: 20px 20px 15px 15px;
+    box-shadow:
+        0 5px 20px rgba(239, 68, 68, 0.3),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+}
+
+/* Olhos do Robô */
+.alert-robot .robot-eyes {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.alert-robot .robot-eye {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.alert-robot .robot-eye::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #1a1a2e;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: lookAround 4s ease-in-out infinite;
+}
+
+@keyframes lookAround {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+
+    25% {
+        transform: translate(-30%, -50%);
+    }
+
+    50% {
+        transform: translate(-50%, -30%);
+    }
+
+    75% {
+        transform: translate(-70%, -50%);
+    }
+}
+
+/* Expressão brava - sobrancelhas */
+.alert-robot .robot-eyebrow {
+    position: absolute;
+    width: 20px;
+    height: 4px;
+    background: #991b1b;
+    border-radius: 2px;
+    top: 8px;
+}
+
+.alert-robot .robot-eyebrow.left {
+    left: 12px;
+    transform: rotate(20deg);
+}
+
+.alert-robot .robot-eyebrow.right {
+    right: 12px;
+    transform: rotate(-20deg);
+}
+
+/* Boca do robô de alerta */
+.alert-robot .robot-mouth {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 10px;
+    border: 3px solid #991b1b;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+}
+
+/* Luz de alerta piscando */
+.alert-robot .robot-alert-light {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(145deg, #fbbf24, #f59e0b);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+    animation: alertPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes alertPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+/* Braços do robô */
+.alert-robot .robot-arm {
+    position: absolute;
+    width: 16px;
+    height: 40px;
+    background: linear-gradient(145deg, #dc2626, #b91c1c);
+    border-radius: 8px;
+    top: 50px;
+}
+
+.alert-robot .robot-arm.left {
+    left: -5px;
+    transform: rotate(15deg);
+    animation: waveArm 1s ease-in-out infinite;
+}
+
+.alert-robot .robot-arm.right {
+    right: -5px;
+    transform: rotate(-15deg);
+    animation: waveArm 1s ease-in-out infinite 0.5s;
+}
+
+@keyframes waveArm {
+
+    0%,
+    100% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(25deg);
+    }
+}
+
+/* Pernas do robô */
+.alert-robot .robot-leg {
+    position: absolute;
+    width: 18px;
+    height: 25px;
+    background: linear-gradient(145deg, #b91c1c, #991b1b);
+    border-radius: 8px 8px 10px 10px;
+    bottom: -15px;
+}
+
+.alert-robot .robot-leg.left {
+    left: 18px;
+}
+
+.alert-robot .robot-leg.right {
+    right: 18px;
+}
+
+/* ==========================================
+   ROBÔ DE MÉRITO (RECOMPENSA)
+   ========================================== */
+.merit-robot-container {
+    bottom: 20px;
+    right: 20px;
+}
+
+.merit-robot {
+    width: 100px;
+    height: 130px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: celebrateRobot 2s ease-in-out infinite;
+}
+
+@keyframes celebrateRobot {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    25% {
+        transform: translateY(-8px) rotate(-3deg);
+    }
+
+    75% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+}
+
+/* Corpo do Robô de Mérito */
+.merit-robot .robot-body {
+    position: absolute;
+    width: 80px;
+    height: 70px;
+    left: 10px;
+    top: 35px;
+    background: linear-gradient(145deg, #10b981, #059669);
+    border-radius: 20px 20px 30px 30px;
+    box-shadow:
+        0 10px 30px rgba(16, 185, 129, 0.4),
+        inset 0 -10px 20px rgba(0, 0, 0, 0.2),
+        inset 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.merit-robot .robot-body::before {
+    content: '⭐';
+    position: absolute;
+    font-size: 1.8rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: starPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+/* Cabeça do Robô de Mérito */
+.merit-robot .robot-head {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    left: 15px;
+    top: 0;
+    background: linear-gradient(145deg, #34d399, #10b981);
+    border-radius: 20px 20px 15px 15px;
+    box-shadow:
+        0 5px 20px rgba(16, 185, 129, 0.3),
+        inset 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Olhos felizes do robô de mérito */
+.merit-robot .robot-eyes {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.merit-robot .robot-eye {
+    width: 16px;
+    height: 10px;
+    background: transparent;
+    border-radius: 50%;
+    position: relative;
+    border-top: 4px solid white;
+    transform: rotate(0);
+    box-shadow: 0 -3px 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Sorriso grande */
+.merit-robot .robot-mouth {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 14px;
+    border: 4px solid white;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Coroa/luz de sucesso */
+.merit-robot .robot-crown {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    animation: crownBounce 1s ease-in-out infinite;
+}
+
+@keyframes crownBounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Braços levantados em celebração */
+.merit-robot .robot-arm {
+    position: absolute;
+    width: 16px;
+    height: 40px;
+    background: linear-gradient(145deg, #059669, #047857);
+    border-radius: 8px;
+    top: 40px;
+}
+
+.merit-robot .robot-arm.left {
+    left: -5px;
+    transform: rotate(-45deg);
+    transform-origin: bottom center;
+    animation: celebrateArm 0.6s ease-in-out infinite;
+}
+
+.merit-robot .robot-arm.right {
+    right: -5px;
+    transform: rotate(45deg);
+    transform-origin: bottom center;
+    animation: celebrateArm 0.6s ease-in-out infinite 0.3s;
+}
+
+@keyframes celebrateArm {
+
+    0%,
+    100% {
+        transform: rotate(-45deg);
+    }
+
+    50% {
+        transform: rotate(-60deg);
+    }
+}
+
+.merit-robot .robot-arm.right {
+    animation-name: celebrateArmRight;
+}
+
+@keyframes celebrateArmRight {
+
+    0%,
+    100% {
+        transform: rotate(45deg);
+    }
+
+    50% {
+        transform: rotate(60deg);
+    }
+}
+
+/* Pernas do robô de mérito */
+.merit-robot .robot-leg {
+    position: absolute;
+    width: 18px;
+    height: 25px;
+    background: linear-gradient(145deg, #047857, #065f46);
+    border-radius: 8px 8px 10px 10px;
+    bottom: -15px;
+}
+
+.merit-robot .robot-leg.left {
+    left: 18px;
+}
+
+.merit-robot .robot-leg.right {
+    right: 18px;
+}
+
+/* Confetes de celebração */
+.merit-robot .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    animation: confettiFall 2s linear infinite;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-20px) rotate(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(40px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.merit-robot .confetti:nth-child(1) {
+    background: #fbbf24;
+    left: 10px;
+    top: -10px;
+    animation-delay: 0s;
+}
+
+.merit-robot .confetti:nth-child(2) {
+    background: #60a5fa;
+    left: 30px;
+    top: -15px;
+    animation-delay: 0.3s;
+}
+
+.merit-robot .confetti:nth-child(3) {
+    background: #f472b6;
+    left: 50px;
+    top: -10px;
+    animation-delay: 0.6s;
+}
+
+.merit-robot .confetti:nth-child(4) {
+    background: #a78bfa;
+    left: 70px;
+    top: -12px;
+    animation-delay: 0.9s;
+}
+
+/* ==========================================
+   BALÃO DE MENSAGEM DOS ROBÔS
+   ========================================== */
+.robot-message {
+    position: absolute;
+    bottom: 140px;
+    background: white;
+    color: #1a1a2e;
+    padding: 14px 18px;
+    border-radius: 16px 16px 16px 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 260px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+}
+
+.robot-message.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.robot-message::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    border: 10px solid transparent;
+    border-top-color: white;
+    border-bottom: none;
+}
+
+.alert-robot-container .robot-message {
+    left: 0;
+    border-color: #ef4444;
+    border-radius: 16px 16px 16px 4px;
+}
+
+.merit-robot-container .robot-message {
+    right: 0;
+    left: auto;
+    border-radius: 16px 16px 4px 16px;
+}
+
+.merit-robot-container .robot-message::after {
+    left: auto;
+    right: 15px;
+}
+
+/* Botão de fechar mensagem */
+.robot-message-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #64748b;
+    transition: all 0.2s;
+}
+
+.robot-message-close:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+/* ==========================================
+   ANIMAÇÕES DE ENTRADA/SAÍDA
+   ========================================== */
+.finbot-3d-container.entering .alert-robot,
+.finbot-3d-container.entering .merit-robot {
+    animation: robotEnter 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes robotEnter {
+    0% {
+        transform: translateY(100px) scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-20px) scale(1.1);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.finbot-3d-container.exiting .alert-robot,
+.finbot-3d-container.exiting .merit-robot {
+    animation: robotExit 0.5s ease-in forwards;
+}
+
+@keyframes robotExit {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   VARIAÇÃO DO FM-PRIMARY-ALPHA
+   ========================================== */
+:root {
+    --fm-primary-alpha: rgba(16, 185, 129, 0.1);
+    --border-subtle: rgba(148, 163, 184, 0.15);
+}
+
+/* ==========================================
+   MOBILE RESPONSIVENESS FOR ROBOTS
+   ========================================== */
+@media (max-width: 768px) {
+    .finbot-3d-container {
+        transform: scale(0.65);
+        transform-origin: bottom left;
+    }
+    .merit-robot-container {
+        transform-origin: bottom right;
+    }
+    .robot-message {
+        bottom: 110px;
+        max-width: 200px;
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+}

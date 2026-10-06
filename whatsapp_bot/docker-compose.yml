@@ -1,0 +1,91 @@
+version: '3.8'
+
+volumes:
+  n8n_data:
+  evolution_store:
+  evolution_instances:
+  postgres_data:
+  redis_data:
+
+services:
+  # Banco de Dados PostgreSQL (Recomendado para Evolution API e n8n)
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres123}
+      POSTGRES_DB: ${DB_NAME:-n8n_evolution}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Redis (Para o Evolution API gerenciar mensagens)
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD:-redis123}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  # Evolution API (Conexão com WhatsApp)
+  evolution-api:
+    image: atendai/evolution-api:latest
+    container_name: evolution-api
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_URL=https://${EVOLUTION_DOMAIN}
+      - DOCKER_ENV=true
+      - LOG_LEVEL=ERROR,WARN,DEBUG,INFO,LOG,VERBOSE,DARK,WEBHOOKS
+      # Autenticação
+      - AUTHENTICATION_TYPE=apikey
+      - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY:-sua_chave_secreta_aqui}
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      # Banco de dados
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres123}@postgres:5432/${DB_NAME:-n8n_evolution}?schema=public
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution_api
+      # Redis
+      - REDIS_URI=redis://:${REDIS_PASSWORD:-redis123}@redis:6379/1
+      - REDIS_PREFIX_KEY=evolution
+      # Webhooks globais
+      - WEBHOOK_GLOBAL_URL=
+      - WEBHOOK_GLOBAL_ENABLED=false
+    volumes:
+      - evolution_instances:/evolution/instances
+      - evolution_store:/evolution/store
+
+  # n8n (Orquestrador)
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "5678:5678"
+    environment:
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${DB_NAME:-n8n_evolution}
+      - DB_POSTGRESDB_USER=${DB_USER:-postgres}
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD:-postgres123}
+      - WEBHOOK_URL=https://${N8N_DOMAIN}
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - N8N_HOST=${N8N_DOMAIN}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+    volumes:
+      - n8n_data:/home/node/.n8n

@@ -1,0 +1,1469 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinnMestre - Domine Suas Finanças de Uma Vez Por Todas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           RESET E VARIÁVEIS
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-glow: rgba(16, 185, 129, 0.4);
+            --secondary: #3b82f6;
+            --accent: #8b5cf6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-glass: rgba(30, 41, 59, 0.85);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --border: rgba(148, 163, 184, 0.1);
+            --gradient-hero: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%);
+            --gradient-primary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Background animado */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 540px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 8px 30px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--primary-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-mockup {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card.card-1 {
+            top: 10%;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .floating-card.card-2 {
+            bottom: 20%;
+            left: -40px;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .floating-card .card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .floating-card .card-icon.green {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+
+        .floating-card .card-icon.blue {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--secondary);
+        }
+
+        .floating-card .card-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .floating-card .card-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           PROBLEMA / DOR
+           ========================================== */
+        .problem-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-tag.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+        }
+
+        .section-tag.blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .problem-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .problem-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================
+           SOLUÇÃO / BENEFÍCIOS
+           ========================================== */
+        .solution-section {
+            padding: 100px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ==========================================
+           FUNCIONALIDADES
+           ========================================== */
+        .features-section {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .feature-check {
+            width: 28px;
+            height: 28px;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================
+           DEPOIMENTOS
+           ========================================== */
+        .testimonials-section {
+            padding: 100px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .testimonial-stars {
+            color: var(--warning);
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================
+           PREÇO
+           ========================================== */
+        .pricing-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 50%, var(--bg-dark) 100%);
+        }
+
+        .pricing-card {
+            max-width: 550px;
+            margin: 0 auto;
+            background: var(--bg-glass);
+            border: 2px solid var(--primary);
+            border-radius: 28px;
+            padding: 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 80px var(--primary-glow);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-hero);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        .pricing-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .pricing-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .pricing-value {
+            margin-bottom: 32px;
+        }
+
+        .price-old {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+            margin-bottom: 8px;
+        }
+
+        .price-new {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .price-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .price-amount {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 36px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 22px;
+            font-size: 1.2rem;
+        }
+
+        .pricing-guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .pricing-guarantee i {
+            color: var(--primary);
+        }
+
+        /* ==========================================
+           GARANTIA
+           ========================================== */
+        .guarantee-section {
+            padding: 80px 0;
+        }
+
+        .guarantee-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(16, 185, 129, 0.08);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .guarantee-icon {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 10px 40px var(--primary-glow);
+        }
+
+        .guarantee-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .guarantee-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ==========================================
+           FAQ
+           ========================================== */
+        .faq-section {
+            padding: 100px 0;
+            background: var(--bg-card);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ==========================================
+           CTA FINAL
+           ========================================== */
+        .final-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .final-cta h2 span {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .final-cta .btn-primary {
+            padding: 22px 50px;
+            font-size: 1.3rem;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .footer-logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================
+           RESPONSIVO
+           ========================================== */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                margin: 0 auto 32px;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .hero-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .guarantee-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .final-cta h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stat-item {
+                text-align: center;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .pricing-card {
+                padding: 32px 24px;
+            }
+
+            .price-amount {
+                font-size: 3.5rem;
+            }
+
+            .benefits-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <!-- LOGO FinnMestre -->
+                    <div class="landing-logo"
+                        style="display: flex; align-items: center; gap: 14px; margin-bottom: 30px;">
+                        <div
+                            style="width: 56px; height: 56px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span
+                            style="font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FinnMestre</span>
+                    </div>
+                    <div class="hero-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>Acesso Imediato</span>
+                    </div>
+                    <h1>Assuma o Controle Total das Suas <span>Finanças</span> em Minutos</h1>
+                    <p class="hero-description">
+                        O FinnMestre é o sistema inteligente que transforma a bagunça financeira em clareza total.
+                        Veja exatamente para onde vai cada centavo e tome decisões que multiplicam seu dinheiro.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">500+</span>
+                            <span class="stat-label">Usuários Ativos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">R$ 2M+</span>
+                            <span class="stat-label">Já Gerenciados</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">4.9★</span>
+                            <span class="stat-label">Avaliação</span>
+                        </div>
+                    </div>
+                    <div class="cta-group">
+                        <a href="#preco" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i>
+                            Quero Começar Agora
+                        </a>
+                        <a href="#funcionalidades" class="btn btn-secondary">
+                            <i class="fas fa-play"></i>
+                            Ver Funcionalidades
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image" style="position: relative; min-height: 380px; width: 100%;">
+                    <!-- Card 1: Entrada (CIMA - esquerda) -->
+                    <div class="floating-card"
+                        style="position: absolute; top: 0; left: 0; animation: float 3s ease-in-out infinite;">
+                        <div class="card-icon green">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-value">+R$ 5.000</div>
+                        <div class="card-label">Entrada este mês</div>
+                    </div>
+                    <!-- Card 2: Economia (BAIXO - centro-esquerda) -->
+                    <div class="floating-card"
+                        style="position: absolute; top: 55%; left: 25%; animation: float 3s ease-in-out infinite; animation-delay: 0.8s;">
+                        <div class="card-icon blue">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="card-value">23%</div>
+                        <div class="card-label">Economia mensal</div>
+                    </div>
+                    <!-- Card 3: Meta (CIMA - centro-direita) -->
+                    <div class="floating-card"
+                        style="position: absolute; top: 5%; left: 50%; animation: float 3s ease-in-out infinite; animation-delay: 1.6s;">
+                        <div class="card-icon" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="card-value">85%</div>
+                        <div class="card-label">Meta alcançada</div>
+                    </div>
+                    <!-- Card 4: Gastos (BAIXO - direita) -->
+                    <div class="floating-card"
+                        style="position: absolute; top: 60%; right: 0; animation: float 3s ease-in-out infinite; animation-delay: 2.4s;">
+                        <div class="card-icon" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="card-value">R$ 2.350</div>
+                        <div class="card-label">Gastos controlados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEMA / DOR -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">O Problema</span>
+                <h2 class="section-title">Você se identifica com alguma dessas situações?</h2>
+                <p class="section-subtitle">A maioria das pessoas enfrenta esses desafios financeiros todos os dias...
+                </p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Não sabe para onde vai o dinheiro</h3>
+                    <p>O salário cai e desaparece. Você não faz ideia de quanto gasta em cada categoria.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>Sempre no vermelho no fim do mês</h3>
+                    <p>Parece impossível fechar o mês no positivo, mesmo ganhando um salário razoável.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3>Planilhas confusas e abandonadas</h3>
+                    <p>Já tentou usar planilhas, mas são complicadas demais e você sempre abandona.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Dívidas que não diminuem</h3>
+                    <p>Cartão de crédito, financiamentos... As dívidas parecem ter vida própria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUÇÃO / BENEFÍCIOS -->
+    <section class="solution-section" id="funcionalidades">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag success">A Solução</span>
+                <h2 class="section-title">O FinnMestre resolve tudo isso para você</h2>
+                <p class="section-subtitle">Um sistema completo, intuitivo e poderoso para dominar suas finanças</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Dashboard Inteligente</h3>
+                    <p>Visualize toda sua vida financeira em um único lugar. Gráficos claros, resumos instantâneos e
+                        insights que fazem diferença.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Categorização Automática</h3>
+                    <p>Organize seus gastos por categorias personalizadas. Saiba exatamente quanto gasta com
+                        alimentação, transporte, lazer e mais.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Alertas Inteligentes</h3>
+                    <p>Receba avisos quando estiver gastando demais ou quando uma meta financeira estiver próxima de ser
+                        atingida.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Metas Financeiras</h3>
+                    <p>Defina objetivos claros e acompanhe seu progresso. Seja para uma viagem, reserva de emergência ou
+                        quitar dívidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUNCIONALIDADES DETALHADAS -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag blue">Funcionalidades</span>
+                <h2 class="section-title">Tudo que você precisa em um só lugar</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Múltiplas Contas</h4>
+                        <p>Gerencie todas suas contas bancárias</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Relatórios Detalhados</h4>
+                        <p>Análises mensais e anuais completas</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Exportação de Dados</h4>
+                        <p>Exporte para Excel ou PDF</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Gráficos Interativos</h4>
+                        <p>Visualize tendências facilmente</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>100% Responsivo</h4>
+                        <p>Acesse de qualquer dispositivo</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Dados Seguros</h4>
+                        <p>Suas informações protegidas</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Suporte Dedicado</h4>
+                        <p>Ajuda sempre que precisar</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-check"><i class="fas fa-check"></i></div>
+                    <div class="feature-text">
+                        <h4>Atualizações Grátis</h4>
+                        <p>Novas funções sem custo extra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag success">Depoimentos</span>
+                <h2 class="section-title">O que nossos usuários dizem</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Finalmente consegui entender para onde meu dinheiro estava indo. Em 3
+                        meses economizei R$ 1.500 que nem sabia que gastava em bobagens!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CA</div>
+                        <div class="author-info">
+                            <h4>Carolina Almeida</h4>
+                            <p>Designer Freelancer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"O dashboard é incrível! Simples de usar e muito visual. Minha esposa e
+                        eu finalmente estamos na mesma página sobre nossas finanças."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RM</div>
+                        <div class="author-info">
+                            <h4>Ricardo Mendes</h4>
+                            <p>Engenheiro de Software</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Já testei vários apps de finanças e esse é disparado o melhor.
+                        Interface linda, fácil de usar e realmente me ajudou a sair das dívidas."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JL</div>
+                        <div class="author-info">
+                            <h4>Julia Lima</h4>
+                            <p>Empreendedora</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇO -->
+    <section class="pricing-section" id="preco">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag success">Oferta Especial</span>
+                <h2 class="section-title">Invista em você e no seu futuro</h2>
+                <p class="section-subtitle">Por menos do que uma pizza por mês, domine suas finanças para sempre</p>
+            </div>
+            <div class="pricing-card">
+                <div class="pricing-badge">🔥 77% OFF</div>
+                <h3 class="pricing-title">Acesso Vitalício ao FinnMestre</h3>
+                <p class="pricing-subtitle">Pague uma vez, use para sempre</p>
+                <div class="pricing-value">
+                    <p class="price-old">De R$ 129,90</p>
+                    <div class="price-new">
+                        <span class="price-currency">R$</span>
+                        <span class="price-amount">29,90</span>
+                    </div>
+                    <p class="price-period">pagamento único</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check-circle"></i> Acesso vitalício ao sistema completo</li>
+                    <li><i class="fas fa-check-circle"></i> Dashboard inteligente com gráficos</li>
+                    <li><i class="fas fa-check-circle"></i> Gestão ilimitada de contas</li>
+                    <li><i class="fas fa-check-circle"></i> Metas e alertas personalizados</li>
+                    <li><i class="fas fa-check-circle"></i> Relatórios e exportação de dados</li>
+                    <li><i class="fas fa-check-circle"></i> Suporte prioritário por email</li>
+                    <li><i class="fas fa-check-circle"></i> Todas as atualizações futuras grátis</li>
+
+                </ul>
+                <a href="#" class="btn btn-primary pricing-cta">
+                    <i class="fas fa-lock"></i>
+                    Garantir Meu Acesso Agora
+                </a>
+                <div class="pricing-guarantee">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>7 dias de garantia incondicional</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GARANTIA -->
+    <section class="guarantee-section">
+        <div class="container">
+            <div class="guarantee-card">
+                <div class="guarantee-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="guarantee-content">
+                    <h3>Garantia de 7 Dias Sem Risco</h3>
+                    <p>Experimente o FinnMestre por 7 dias. Se por qualquer motivo você não ficar 100% satisfeito,
+                        devolvemos seu dinheiro integralmente, sem perguntas. Você não tem nada a perder e tudo a
+                        ganhar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag blue">Dúvidas Frequentes</span>
+                <h2 class="section-title">Perguntas e Respostas</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item active">
+                    <button class="faq-question">
+                        <span>Por quanto tempo tenho acesso ao FinnMestre?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>O acesso é vitalício! Você paga uma única vez e pode usar o sistema para sempre, incluindo
+                            todas as atualizações futuras sem custo adicional.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Preciso ter conhecimento técnico para usar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Não! O FinnMestre foi desenvolvido para ser extremamente intuitivo. Se você sabe usar
+                            WhatsApp, consegue usar o FinnMestre. Além disso, oferecemos tutoriais e suporte para
+                            ajudá-lo.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Posso acessar de qualquer dispositivo?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sim! O sistema é 100% online e responsivo. Acesse do seu computador, tablet ou celular, de
+                            qualquer lugar com internet.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Meus dados financeiros estão seguros?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Com certeza! Seus dados são criptografados e armazenados com segurança. Não compartilhamos
+                            informações com terceiros e você tem total controle sobre seus dados.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Como funciona a garantia de 7 dias?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Se dentro de 7 dias você não gostar do FinnMestre por qualquer motivo, basta nos enviar um
+                            email que devolvemos 100% do seu investimento, sem burocracia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Pronto para <span>Transformar</span> Suas Finanças?</h2>
+            <p>Não deixe mais um mês passar sem controle. Comece hoje mesmo a construir o futuro financeiro que você
+                merece.</p>
+            <a href="#preco" class="btn btn-primary">
+                <i class="fas fa-rocket"></i>
+                Sim! Quero o FinnMestre Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span class="footer-logo-text">FinnMestre</span>
+            </div>
+            <p>© 2026 FinnMestre. Todos os direitos reservados.</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">Este site não é afiliado ao Facebook ou a qualquer entidade
+                do Facebook.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Fechar todos
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Abrir o clicado (se não estava ativo)
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

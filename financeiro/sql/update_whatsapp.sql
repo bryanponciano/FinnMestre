@@ -1,0 +1,1 @@
+ALTER TABLE `usuarios` ADD COLUMN IF NOT EXISTS `telefone_whatsapp` VARCHAR(20) NULL DEFAULT NULL AFTER `email`;
